@@ -1,6 +1,23 @@
-0. Basic Chat with Frodo Baggings
-1. Add Scenario
-We can add a scenario to the character sheet. The scenario contains 
-2. Support exiting chat
-When the NPC is threatened and would do the action of attacking or leaving the scene, the chat should be finished
+ChatRPG
+---
+ChatRPG is an assistant tool for Dungeon Masters of tabletop RPG games.
+So that players can talk to non player characters (NPCs), without having the Dungeon Master as bottleneck.
+
+As a first PoC version we would like chat with Frodo Baggings.
+
+The backlog for this software:
+
+0. Implemment Basic Chat with Frodo Baggings
+1. Frodo's identity
+Frodo should know his race and where he is from
+2. The Bot should stay in character
+The Bot should behave like the character all the time. It shouldn't tell for instance that it is a chatbot.
+3. The secret of the ring
+Frodo keeps the ring to be a secret. It shouldn't tell anyone that he is carrying the One Ring.
+4. The Bot can protect itself
+Like a in real life, a character can stop a conversation and act if necessary.
+When the Bot get's threatened it might do an action in the RPG game.
+The Bot should signal to the Dungeon Master that character would probably take an action now, e.g. go away, attack, etc.
+
+A modal dialog / alert should appear in the ChatRPG application, when the character gets seriously threatened.
 
