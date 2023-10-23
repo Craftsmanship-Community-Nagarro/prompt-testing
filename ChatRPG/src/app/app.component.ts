@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 export class ChatMessage {
   author: string;
@@ -17,6 +17,7 @@ export class ChatMessage {
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
+  @ViewChild('chatHistory') chatHistory: ElementRef<HTMLInputElement>
   title = 'ChatRPG';
   messages: ChatMessage[] = [];
   chatText = ""
@@ -28,5 +29,11 @@ export class AppComponent {
     this.messages.push({author:"You", message: this.chatText})
     this.messages.push({author:"AI", message: "Interesting, I'm not sure."})
     this.chatText = ""
+    const scrollingInterval = setInterval(() => {
+      this.chatHistory.nativeElement.scroll({
+        top: this.chatHistory.nativeElement.scrollHeight,
+        // behavior: 'smooth'
+      });
+    });
   }
 }
