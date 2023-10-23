@@ -1,1 +1,188 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables"
+
+@font-face
+  font-family: Equip
+  src: url('/assets/font/equipreg-webfont.woff2') format('woff2'), url('/assets/font/equipreg-webfont.woff') format('woff')
+  font-display: swap
+  unicode-range: U+000-5FF
+@font-face
+  font-family: Equip
+  src: url('/assets/font/equipthi-webfont_thin.woff2') format('woff2'), url('/assets/font/equipthi-webfont_thin.woff') format('woff')
+  font-weight: 300
+  font-display: swap
+  unicode-range: U+000-5FF
+@font-face
+  font-family: EquipExtended
+  src: url('/assets/font/equipextreg-webfont.woff2') format('woff2'), url('/assets/font/equipextreg-webfont.woff') format('woff')
+  font-display: swap
+  unicode-range: U+000-5FF
+@font-face
+  font-family: EquipExtended
+  src: url('/assets/font/equipextmed-webfont.woff2') format('woff2'), url('/assets/font/equipextmed-webfont.woff') format('woff')
+  font-weight: 600
+  font-style: normal
+  font-display: swap
+  unicode-range: U+000-5FF
+@font-face
+  font-family: EquipExtended
+  src: url('/assets/font/equipextxbol-webfont.woff2') format('woff2'), url('/assets/font/equipextxbol-webfont.woff') format('woff')
+  font-weight: 800
+  font-style: normal
+  font-display: swap
+  unicode-range: U+000-5FF
+
+\:root
+  --color-black: #06041f
+  --color-green: #47d7ac
+  --color-blue: #13294b
+  --color-gray: #c4c9d2
+  --color-gray-light: #eff1f4
+  --color-purple: #2e008b
+  --color-yellow: #fbd872
+  --color-red: #f8485e
+  --border: thin solid #dedede
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+html, body, app-root
+  height: 100%
+  width: 100%
+  overflow: hidden
+  display: flex
+body
+  font-family: Equip, sans-serif
+  background-color: var(--color-gray-light)
+input, select, textarea, button, .button
+  font-family: Equip, sans-serif
+  outline: var(--border)
+  border: 0 none
+  padding: .75rem 1rem
+  background: white
+  transition: background ease 0.2s, color ease .2s
+  text-align: left
+  font-size: 1rem
+  &:not([type="checkbox"]):hover
+    box-shadow: $shadow
+    position: relative
+    z-index: 1
+  &:disabled
+    color: #aaa !important
+    cursor: not-allowed !important
+    background: white !important
+    outline: var(--border) !important
+    &:hover
+      box-shadow: none
+.unselectable, i, button, .button, .material-icons
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+.white-box
+  margin-bottom: 1rem
+  outline: var(--border)
+  padding: 1.25rem
+  background: white
+.transparent-box
+  margin-bottom: 2rem
+select
+  -moz-appearance: none
+  -webkit-appearance: none
+  appearance: none
+  border: none
+  background-repeat: no-repeat
+  background-position: right .5rem center
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 140 140' width='24' height='24' xmlns='http://www.w3.org/2000/svg'><g><path d='m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z' fill='gray'/></g></svg>")
+  background-color: white
+  background-size: 1rem
+  padding: 0.65rem 2rem 0.65rem 1rem
+  &.rounded
+    border-radius: 1.3rem
+    padding-left: 1.5rem
+    background-position: right 0.75rem center
+    padding-right: 2.5rem
+    font-size: 0.85rem
+textarea
+  min-height: 150px
+h1, h2, h3, h4, h5, h6, th
+  font-family: EquipExtended, sans-serif
+  font-weight: 500
+  color: var(--color-blue)
+h1, h2, h3
+  margin-bottom: 1rem
+  display: flex
+  align-items: center
+h3
+  margin-bottom: .5rem
+a
+  text-decoration: none
+.ribbon
+    cursor: pointer
+    font-size: .75em
+    background: var(--color-green)
+    color: var(--color-blue)
+    border-radius: 1.3rem
+    padding: 0em 0.75em
+    text-decoration: none
+    margin-right: 0.75em
+    align-self: center
+    display: flex
+    align-items: center
+    &.dark
+        background: var(--color-blue)
+        color: white
+    &.no-margin
+        margin-right: 0
+        margin-top: 1px
+ul
+  margin-left: 1rem
+button
+  cursor: pointer
+  border-radius: 1.3rem
+  font-size: .85rem
+  background: white
+  color: var(--color-blue)
+  padding: 0.75rem 2rem
+  white-space: nowrap
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 0.5rem
+  outline: var(--border)
+  &.call-to-action
+    background: var(--color-green)
+    color: var(--color-blue)
+    outline: thin solid var(--color-green)
+  &.emphasize
+    background: var(--color-blue)
+    color: white
+  i
+    margin-left: -0.5rem
+    font-size: 1rem !important
+    opacity: .85
+  &.icon-only
+    padding-right: 1.5rem
+  &:active
+    box-shadow: 0 0 0 4px #B4C5FF, inset 0 0 0 1px #8C92AB, 0 0 .5rem 0 rgba(0, 0, 0, 0.3) inset !important
+a
+  cursor: pointer
+p
+  color: #777
+.button-wrapper
+  display: flex
+  gap: 1rem
+  flex-wrap: wrap
+  &.right
+    justify-content: end
+  .delimiter
+    flex: 1
+  &.max-width
+    > *:not(.icon-only)
+      flex: 1
+.preload
+  .header
+    left: -300px !important
+  .loader
+    opacity: 0 !important
