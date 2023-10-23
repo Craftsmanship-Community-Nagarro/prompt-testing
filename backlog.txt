@@ -1,0 +1,6 @@
+0. Basic Chat with Frodo Baggings
+1. Add Scenario
+We can add a scenario to the character sheet. The scenario contains 
+2. Support exiting chat
+When the NPC is threatened and would do the action of attacking or leaving the scene, the chat should be finished
+
