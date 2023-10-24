@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "tasks": [
     {
+    
       "type": "npm",
       "script": "start",
       "isBackground": true,
@@ -18,6 +19,9 @@
             "regexp": "bundle generation complete"
           }
         }
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/ChatRPG"
       }
     },
     {
