@@ -21,21 +21,32 @@ export class AppComponent {
   title = 'ChatRPG';
   messages: ChatMessage[] = [];
   chatText = ""
+  isLoading = false
 
   onChatMessageSent(event: Event | undefined) {
+    if (this.isLoading) return;
     if (event) event.preventDefault()
     if (this.chatText.trim() === "") return
     
-    this.messages.push({author:"You", message: this.chatText})
+    this.sendChatMessage(this.chatText.trim())
     this.chatText = ""
+  }
+
+  sendChatMessage(text: string) {
+    this.isLoading = true
+
+    this.messages.push({author:"You", message: text})
     const scrollingInterval = setInterval(() => {
       this.scrollToBottomOfChat();
     });
     
-    this.fakeStreamingResponse("Interesting, I'm not sure.")
+    this.simulateStreamingResponse("Interesting, I'm not sure.")
 
     setTimeout(() => clearInterval(scrollingInterval), 1000);
     this.scrollToBottomOfChat();
+
+  
+    this.isLoading = false
   }
 
   scrollToBottomOfChat() {
@@ -44,14 +55,14 @@ export class AppComponent {
     });
   }
 
-  async fakeStreamingResponse(text: string) {
+  async simulateStreamingResponse(text: string) {
     const currentMessage = new ChatMessage("AI", "");
     this.messages.push(currentMessage);
 
     const wordsArray = text.split(' ')
 
     for (const word of wordsArray) {
-      await this.wait(100) // simulate streaming response
+      await this.wait(100) //
       currentMessage.message += word + " "
     }
   }
