@@ -1,4 +1,4 @@
-<div id="main-content-container">
+<div id="main-content-container" style="display:flex; flex-direction:column; justify-content: space-between; height:100vh;"> 
   <div id="chat-mode-container">
     <div class="chat-history" #chatHistory>
       <div *ngFor="let message of messages" class="row-wrapper">
@@ -11,11 +11,8 @@
   <div id="chat-input-area">
     <textarea id="chat-text" type="text" [(ngModel)]="chatText" placeholder="Send a message"
       (keydown.enter)="onChatMessageSent($event)"></textarea>
-    <button class="send-message" *ngIf="false">
+    <button class="send-message" >
       <i class="material-icons" (click)="onChatMessageSent(undefined)">send</i>
-    </button>
-    <button class="send-message" *ngIf="false" disabled>
-      <i class="material-icons">more_horiz</i>
     </button>
   </div>
 </div>

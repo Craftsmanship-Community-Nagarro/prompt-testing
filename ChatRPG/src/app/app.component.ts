@@ -27,13 +27,38 @@ export class AppComponent {
     if (this.chatText.trim() === "") return
     
     this.messages.push({author:"You", message: this.chatText})
-    this.messages.push({author:"AI", message: "Interesting, I'm not sure."})
     this.chatText = ""
     const scrollingInterval = setInterval(() => {
-      this.chatHistory.nativeElement.scroll({
-        top: this.chatHistory.nativeElement.scrollHeight,
-        // behavior: 'smooth'
-      });
+      this.scrollToBottomOfChat();
+    });
+    
+    this.fakeStreamingResponse("Interesting, I'm not sure.")
+
+    setTimeout(() => clearInterval(scrollingInterval), 1000);
+    this.scrollToBottomOfChat();
+  }
+
+  scrollToBottomOfChat() {
+    this.chatHistory.nativeElement.scroll({
+      top: this.chatHistory.nativeElement.scrollHeight,
+    });
+  }
+
+  async fakeStreamingResponse(text: string) {
+    const currentMessage = new ChatMessage("AI", "");
+    this.messages.push(currentMessage);
+
+    const wordsArray = text.split(' ')
+
+    for (const word of wordsArray) {
+      await this.wait(100) // simulate streaming response
+      currentMessage.message += word + " "
+    }
+  }
+
+  wait(ms: number): Promise<void> {
+    return new Promise<void>((resolve) => {
+      setTimeout(resolve, ms);
     });
   }
 }
