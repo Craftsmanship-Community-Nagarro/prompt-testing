@@ -2,8 +2,8 @@
   <div id="chat-mode-container">
     <div class="chat-history" #chatHistory>
       <div *ngFor="let message of messages" class="row-wrapper">
-        <div [class]="message.author" class="message-bubble" [hidden]="message.message === ''">
-          <div *ngIf="message.message" class="message">{{message.message}}</div>
+        <div [class]="message.role" class="message-bubble" [hidden]="message.content === ''">
+          <div *ngIf="message.content" class="message">{{message.content}}</div>
         </div>
       </div>
     </div>
