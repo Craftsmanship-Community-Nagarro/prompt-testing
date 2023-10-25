@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import OpenAI from 'openai';
 import ChatCompletionMessageParam  from 'openai';
+import { GptMessage, streamChatResponse } from './gpt';
 
 
 interface ChatMessage {
@@ -29,7 +30,7 @@ export class AppComponent {
     this.chatText = ""
   }
 
-  sendChatMessage() {
+  async sendChatMessage() {
     this.messages.push({role:"user", content: this.chatText})
 
     this.isLoading = true
@@ -38,7 +39,13 @@ export class AppComponent {
     });
     
     const gptMessages = this.buildMessages()
-    streamChatResponse(gptMessages)
+
+    const currentAiMessage: ChatMessage = {role:"assistant", content: ""};
+    this.messages.push(currentAiMessage);
+    for await (const chunk of streamChatResponse(gptMessages)) {
+      console.log(JSON.stringify(chunk))
+      currentAiMessage.content += chunk;
+    }
 
     setTimeout(() => clearInterval(scrollingInterval), 1000);
     this.scrollToBottomOfChat();
@@ -47,7 +54,6 @@ export class AppComponent {
 
   buildMessages(): GptMessage[] {
     const gptMessages: GptMessage[] = [];
-    gptMessages.push({role:"system", content:systemPrompt});
     gptMessages.push(...this.messages);
     return gptMessages;
   }
@@ -59,27 +65,3 @@ export class AppComponent {
   }
 }
 
-// This is the OpenAI GPT Integration part
-
-const dotenv = require('dotenv');
-dotenv.config();
-
-const systemPrompt = "You are a friendly assistant."
-
-interface GptMessage {
-  role: 'system' | 'user' | 'assistant';
-  content: string;
-}
-
-const openai = new OpenAI();
-async function* streamChatResponse(messages: GptMessage[]) {
-  const stream = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo', // the model can be switched here
-    messages: messages,
-    stream: true, // we would like to stream back each chunk, instead of waiting for the whole response message
-  });
-  for await (const part of stream) {
-    const chunk = part.choices[0]?.delta?.content || '';
-    yield chunk;
-  }
-}
