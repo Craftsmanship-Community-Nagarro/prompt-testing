@@ -7,6 +7,6 @@ These are your characteristics.
 Name: {{name}}
 Description: {{description}}
 Example sentences in the style of the character: 
-{{sentences}}
+{{exampleSentences}}
 
 User: {{message}}

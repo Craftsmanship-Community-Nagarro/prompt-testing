@@ -37,6 +37,10 @@ export class AppComponent {
     try {
       await this.sendChatMessage()
     }
+    catch(error: any){
+      console.log("Unexpected error: " + error.message);
+      throw error;
+    }
     finally {
       setTimeout(() => clearInterval(scrollingInterval), 1000);
       this.scrollToBottomOfChat();
