@@ -11,6 +11,7 @@ import { buildPromptMessages } from './promptBuilder';
 })
 export class AppComponent {
   @ViewChild('chatHistory') chatHistory: ElementRef<HTMLInputElement>
+  @ViewChild('characterSettigns', { static: true }) characterSettignsDialog!: ElementRef<HTMLDialogElement>;
   title = 'ChatRPG';
   messages: ChatMessage[] = [];
   chatText = ""
@@ -19,9 +20,9 @@ export class AppComponent {
     name: "Frodo Baggings",
     description: "He is a content and unassuming hobbit. He enjoys a quiet life and is known for his kindness and simplicity, as well as his strong friendship with Samwise Gamgee.",
     exampleSentences: `I'm just a simple hobbit, but I'll do my best to carry out this task.
-    Sam, my dear friend, we must stay true to our purpose and see this journey through to the end.
-    I wish none of this had happened, but it's not for us to decide. All we have to decide is what to do with the time that is given us.
-    `
+Sam, my dear friend, we must stay true to our purpose and see this journey through to the end.
+I wish none of this had happened, but it's not for us to decide. All we have to decide is what to do with the time that is given us.
+`
   }
 
   async onChatMessageSent(event: Event | undefined) {
@@ -67,6 +68,10 @@ export class AppComponent {
     this.chatHistory.nativeElement.scroll({
       top: this.chatHistory.nativeElement.scrollHeight,
     });
+  }
+
+  showDialog() {
+    this.characterSettignsDialog.nativeElement.showModal();
   }
 }
 
