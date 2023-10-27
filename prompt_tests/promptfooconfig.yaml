@@ -1,0 +1,14 @@
+prompts: [../ChatRPG/src/assets/prompt.txt]
+providers:
+  - openai:gpt-3.5-turbo:
+      id: openai-gpt-3.5-turbo
+      config:
+        temperature: 0.2
+        max_tokens: 2000
+tests:
+  - description: First test
+    vars:
+      message: "Greetings dear hobbit, what is your name? You look familiar to me."
+    assert:
+      - type: contains
+        value: Frodo

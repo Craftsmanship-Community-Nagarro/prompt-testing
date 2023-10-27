@@ -6,6 +6,8 @@ For an introduction to this topic I can recommend this video presentation of Jos
 
 # Getting started
 
+## Setup the application
+
 Requirements:
 - install node.js
 - install npm
@@ -17,13 +19,27 @@ Setup your OpenAI API Key:
 - paste the API Key into the file secret_api.key
 Make soure you don't accidentally commit the secret to git.
 
-
 Start the application:
 - open command line
 - go to the folder /ChatRPG
 - execute *ng serve*
 
+## Setup Prompt Testing
+We are going to use the promptfoo library to write prompt tests.
+You could write the tests on your own, without extra library, but using promptfoo features can make things simpler.
+
+- open command line
+- go to /prompt_tests
+- execute: *npm install*
+- try test execution run: *promptfoo eval*
+- view the results in the GUI: *promptfoo view*
+
 # Code excersises
 
 Open backlog.txt, which contains work items as excersises.
 Implement the work items, Start with work item 1.
+
+# Disclaimer
+
+You can copy parts of the code, but don't use this code, as it is, for production applications.
+In particular be careful with handling your OpenAI API Key, cause unintended usage can result in a lot of cost.

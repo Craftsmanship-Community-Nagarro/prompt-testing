@@ -1,21 +1,14 @@
 // This is the OpenAI GPT Integration part
 
-export interface GptMessage {
-    role: 'system' | 'user' | 'assistant';
-    content: string;
-  }
-  
-let systemPrompt = ""
+import { GptMessage } from "./models";
+
+
 let apiKey = ""
 
 function initConfigs(){
   fetch("http://localhost:4200/assets/secret_api.key").then(
     async(response)=> {
       apiKey= await response.text();
-    })
-  fetch("http://localhost:4200/assets/prompt.txt").then(
-    async(response)=> {
-      systemPrompt= await response.text();
     })
 }
 
@@ -26,10 +19,7 @@ export async function* streamChatResponse(messages: GptMessage[]) {
     throw new Error("No API Key has been set! Set your OpenAI key in the file 'assets/secret_api.key'");
   }
 
-  const system_message: GptMessage = {role:"system", content:systemPrompt}
-  const all_messages = [system_message, ...messages]
-
-  const reader = await callOpenAI(all_messages);
+  const reader = await callOpenAI(messages);
   
   let isStreaming = true;
   while (isStreaming) {
@@ -86,10 +76,15 @@ function getChunk(value: Uint8Array): string {
 }
 
 function parse(decodedChunk: string): any[] {
-  const lines = decodedChunk.split('\n');
-  const trimmedData = lines.map(line => line.replace(/^data: /, "").trim());
-  const filteredData = trimmedData.filter(line => !["", "[DONE]"].includes(line));
-  const parsedData = filteredData.map(line => JSON.parse(line));
-  
-  return parsedData;
+  try {
+    const lines = decodedChunk.split('\n');
+    const trimmedData = lines.map(line => line.replace(/^data: /, "").trim());
+    const filteredData = trimmedData.filter(line => !["", "[DONE]"].includes(line));
+    const parsedData = filteredData.map(line => JSON.parse(line));
+    return parsedData;
+  }
+  catch(error) {
+    console.log(`Error parsing chunk ${decodedChunk}`);
+    throw error;
+  }
 }

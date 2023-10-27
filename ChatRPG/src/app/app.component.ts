@@ -1,13 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import OpenAI from 'openai';
-import ChatCompletionMessageParam  from 'openai';
-import { GptMessage, streamChatResponse } from './gpt';
+import { streamChatResponse } from './gptApi';
+import { Character, ChatMessage } from './models';
+import { buildPromptMessages } from './promptBuilder';
 
-
-interface ChatMessage {
-  role: 'user' | 'assistant';
-  content: string;
-}
 
 @Component({
   selector: 'app-root',
@@ -20,42 +15,48 @@ export class AppComponent {
   messages: ChatMessage[] = [];
   chatText = ""
   isLoading = false
+  currentCharacter: Character = {
+    name: "Frodo Baggings",
+    description: "He is a content and unassuming hobbit. He enjoys a quiet life and is known for his kindness and simplicity, as well as his strong friendship with Samwise Gamgee.",
+    exampleSentences: `I'm just a simple hobbit, but I'll do my best to carry out this task.
+    Sam, my dear friend, we must stay true to our purpose and see this journey through to the end.
+    I wish none of this had happened, but it's not for us to decide. All we have to decide is what to do with the time that is given us.
+    `
+  }
 
-  onChatMessageSent(event: Event | undefined) {
+  async onChatMessageSent(event: Event | undefined) {
     if (this.isLoading) return;
-    if (event) event.preventDefault()
     if (this.chatText.trim() === "") return
-    
-    this.sendChatMessage()
-    this.chatText = ""
+    if (event) event.preventDefault()
+
+    const scrollingInterval = setInterval(() => {
+      this.scrollToBottomOfChat();
+    });
+    this.isLoading = true
+
+    try {
+      await this.sendChatMessage()
+    }
+    finally {
+      setTimeout(() => clearInterval(scrollingInterval), 1000);
+      this.scrollToBottomOfChat();
+      this.isLoading = false
+    }
   }
 
   async sendChatMessage() {
     this.messages.push({role:"user", content: this.chatText})
 
-    this.isLoading = true
-    const scrollingInterval = setInterval(() => {
-      this.scrollToBottomOfChat();
-    });
+    const responseAiMessage: ChatMessage = {role:"assistant", content: ""};
+    this.messages.push(responseAiMessage);
     
-    const gptMessages = this.buildMessages()
+    const promptMessages = buildPromptMessages(this.messages, this.currentCharacter)
 
-    const currentAiMessage: ChatMessage = {role:"assistant", content: ""};
-    this.messages.push(currentAiMessage);
-    for await (const chunk of streamChatResponse(gptMessages)) {
+    this.chatText = ""
+    for await (const chunk of streamChatResponse(promptMessages)) {
       console.log(JSON.stringify(chunk))
-      currentAiMessage.content += chunk;
+      responseAiMessage.content += chunk;
     }
-
-    setTimeout(() => clearInterval(scrollingInterval), 1000);
-    this.scrollToBottomOfChat();
-    this.isLoading = false
-  }
-
-  buildMessages(): GptMessage[] {
-    const gptMessages: GptMessage[] = [];
-    gptMessages.push(...this.messages);
-    return gptMessages;
   }
 
   scrollToBottomOfChat() {
