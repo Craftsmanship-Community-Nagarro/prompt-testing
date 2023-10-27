@@ -2,6 +2,9 @@
 
 import { GptMessage } from "./models";
 
+const modelVersion = "gpt-3.5-turbo"
+const temperature = 0.2
+const maxTokens = 2000
 
 let apiKey = ""
 
@@ -36,10 +39,10 @@ export async function* streamChatResponse(messages: GptMessage[]) {
 
 async function callOpenAI(messages: GptMessage[]) {
   const params = {      
-      model: "gpt-3.5-turbo",
+      model: modelVersion,
       messages: messages,
-      max_tokens: 2000,
-      temperature: 0.2,};
+      max_tokens: maxTokens,
+      temperature: temperature,};
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {

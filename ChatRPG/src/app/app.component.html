@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <button (click)="showDialog()"><span style="margin-right:10px">Character Settings</span><i class="material-icons">settings</i></button>
+  <button (click)="characterSettignsDialog.nativeElement.showModal()"><span style="margin-right:10px">Character Settings</span><i class="material-icons">settings</i></button>
   <div id="chat-input-area">
     <textarea id="chat-text" type="text" [(ngModel)]="chatText" placeholder="Send a message"
       (keydown.enter)="onChatMessageSent($event)"></textarea>
@@ -22,5 +22,6 @@
       <tr><td>Description:</td><td><textarea [(ngModel)]="currentCharacter.description"></textarea></td></tr>
       <tr><td>Example sentences:</td><td><textarea [(ngModel)]="currentCharacter.exampleSentences"></textarea></td></tr>
   </table>
+  <div class="center"><button (click)="characterSettignsDialog.nativeElement.close()">Close</button></div>
   </dialog>
 </div>
