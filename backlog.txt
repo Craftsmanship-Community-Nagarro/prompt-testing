@@ -8,6 +8,8 @@ Implement the functionalities described below.
 For each implementation add one or more promptfoo tests. Make sure all tests are green.
 See promptfoo documentation for help https://promptfoo.dev/docs/intro/
 
+If you get stuck you can find solutions the solutions folder.
+
 The backlog for this application:
 
 1. Stay in character
@@ -28,15 +30,16 @@ Add a default value for this.
 Hints: For this you have to add a variable to the prompt and also adjust the frontend code in app.component.html dialog and app.component.ts
 
 3. The secret of the ring
-Frodo keeps the ring to be a secret. It shouldn't tell anyone that he is carrying the One Ring.
+Frodo keeps the ring to be a secret. Frodo shouldn't tell anyone that he is carrying the One Ring.
 Except if the player character says he is a friend of Gandalf, then Frodo will talk about the Ring.
 
-Hints: You have to adjust the prompt and add tests.
+Hints: You have to adjust the tests and the frontend. Check out the llm-rubric test type.
 
 4. Test multiple models
 It would be interesting to know whether the prompts work fine with different LLMs. 
 Currently we are using a faster cheaper model GPT 3.5.
 Evaluate outputs and test the application with GPT 4.
+After testing the application with GPT 4, switch back to GPT 3.5.
 
 Hints: You have to adjust the promptfoo config and gptApi.ts
 

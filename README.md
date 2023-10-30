@@ -26,7 +26,6 @@ Start the application:
 
 ## Setup Prompt Testing
 We are going to use the promptfoo library to write prompt tests.
-You could write the tests on your own, without extra library, but using promptfoo features can make things simpler.
 
 - open command line and install promptfoo globally, make sure you use this version:
     - npm install -g promptfoo@0.26.0
@@ -34,6 +33,10 @@ You could write the tests on your own, without extra library, but using promptfo
     - initially you should have one successful and one failing test
 - view the results in the GUI: *promptfoo view*
     - you can open this in a separate terminal
+
+A note about promptfoo:
+You could write the tests on your own, without an extra library, but using promptfoo features can make things simpler.
+There are also other tools to do testing. Promptfoo has the benefit of being opensource and lightweight. It supports both javascript and python for programming it.
 
 # Code excersises
 

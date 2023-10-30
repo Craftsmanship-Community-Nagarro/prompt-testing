@@ -1,0 +1,28 @@
+<div id="main-content-container" style="display:flex; flex-direction:column; justify-content: space-between; height:100vh;"> 
+  <div id="chat-mode-container">
+    <div class="chat-history" #chatHistory>
+      <div *ngFor="let message of messages" class="row-wrapper">
+        <div [class]="message.role" class="message-bubble" [hidden]="message.content === ''">
+          <div *ngIf="message.content" class="message">{{message.content}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button (click)="characterSettignsDialog.nativeElement.showModal()"><span style="margin-right:10px">Character Settings</span><i class="material-icons">settings</i></button>
+  <div id="chat-input-area">
+    <textarea id="chat-text" type="text" [(ngModel)]="chatText" placeholder="Send a message"
+      (keydown.enter)="onChatMessageSent($event)"></textarea>
+    <button class="send-message" >
+      <i class="material-icons" (click)="onChatMessageSent(undefined)">send</i>
+    </button>
+  </div>
+  <dialog #characterSettigns>
+    <table>
+      <tr><td>Name:</td> <td><input [(ngModel)]="currentCharacter.name" /></td></tr>
+      <tr><td>Description:</td><td><textarea [(ngModel)]="currentCharacter.description"></textarea></td></tr>
+      <tr><td>Example sentences:</td><td><textarea [(ngModel)]="currentCharacter.exampleSentences"></textarea></td></tr>
+      <tr><td>Scenario:</td><td><textarea [(ngModel)]="currentCharacter.scenario"></textarea></td></tr>
+  </table>
+  <div class="center"><button (click)="characterSettignsDialog.nativeElement.close()">Close</button></div>
+  </dialog>
+</div>

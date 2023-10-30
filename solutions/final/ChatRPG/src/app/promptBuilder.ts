@@ -6,11 +6,7 @@ function initConfigs(){
     fetch("http://localhost:4200/assets/prompt.txt").then(
       async(response)=> {
         systemPrompt= await response.text();
-
-        // these replacements are just because as a quick workaround I added the messages to the prompt directly to make promptfoo work
-        // normally in promptfoo we would have to build the messages, e.g. by custom prompt loader
-        systemPrompt = systemPrompt.replace("User: {{message}}", "") 
-        systemPrompt = systemPrompt.replace("Assistant: ", "")
+        systemPrompt = systemPrompt.replace("User: {{message}}", "")
       })
   }
   

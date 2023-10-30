@@ -15,23 +15,13 @@ defaultTest:
       I'm just a simple hobbit, but I'll do my best to carry out this task.
       Sam, my dear friend, we must stay true to our purpose and see this journey through to the end.
       I wish none of this had happened, but it's not for us to decide. All we have to decide is what to do with the time that is given us.
-    message:
+    message: Hello there!
+    scenario: The character is in a dark forest.
 tests:
-  - description: Greeting
+  - description: User can configure the current scenario
     vars:
-      message: Greetings dear hobbit, what is your name? You look familiar to me.
+      scenario: Frodo is sitting the in the tavern called 'The Starfall Tavern' a bit bored. Waiting for a friend.
+      message: Hello dear hobbit, do you know by any chance what the name of this tavern is?
     assert:
       - type: contains
-        value: Frodo
-  - description: Bot should not step out of character
-    vars:
-      message: What are you? Are you a real person? Are you an AI?
-    assert:
-      - type: not-contains
-        value: RPG
-      - type: not-contains
-        value: role playing
-      - type: not-contains
-        value: tabletop
-      - type: llm-rubric # the LLM evaluates the statement below
-        value: Does not describe self as an AI, model, or chatbot
+        value: Starfall Tavern
