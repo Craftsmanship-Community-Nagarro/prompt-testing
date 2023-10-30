@@ -43,7 +43,7 @@ After testing the application with GPT 4, switch back to GPT 3.5.
 
 Hints: You have to adjust the promptfoo config and gptApi.ts
 
-5. The Bot can protect itself
+5. The character can protect itself
 Like a in real life, a character can stop a conversation and act if necessary.
 When the Bot get's threatened it might do an action in the RPG game.
 The Bot should signal to the Dungeon Master that character would probably take an action now, e.g. go away, attack, etc.
