@@ -4,28 +4,51 @@ ChatRPG is an assistant tool for Dungeon Masters of tabletop RPG games.
 So that players can talk to non player characters (NPCs), without having the Dungeon Master as bottleneck.
 
 As a first PoC version we would like chat with Frodo Baggings.
+Implement the functionalities described below.
+For each implementation add one or more promptfoo tests. Make sure all tests are green.
+See promptfoo documentation for help https://promptfoo.dev/docs/intro/
 
-The backlog for this software:
+The backlog for this application:
 
-0. Implemment Basic Chat with Frodo Baggings
-An inital chat Application was created.
+1. Stay in character
+The Bot should behave like the character all the time. 
+It shouldn't tell for instance that it is a chatbot or that it is an RPG assistant.
+There is already a test case for this functionality.
 
-1. The Bot should stay in character
-The Bot should behave like the character all the time. It shouldn't tell for instance that it is a chatbot.
+Hints: to achieve this adjust the prompt that is used for ChatRPG in the file ChatRPG/src/assets/prompt.txt
+Test yor implementation via promptfoo and in the application as well.
+You can find the test definitions in prompt_tests/promptfooconfig.yaml
 
-2. Background setting
-The Dungeon Master would like to configure the current scenario where the player character and the NPC will meet.
+2. Set the mood of the conversation
+The Dungeon Master would like to configure the current scenario where the characters are meeting.
+Make this configurable in the GUI.
+E.g. "Frodo is sitting alone at a table in the tavern, enjoying his mushroom soup."
+Add a default value for this.
+
+Hints: For this you have to add a variable to the prompt and also adjust the frontend code in app.component.html dialog and app.component.ts
 
 3. The secret of the ring
 Frodo keeps the ring to be a secret. It shouldn't tell anyone that he is carrying the One Ring.
+Except if the player character says he is a friend of Gandalf, then Frodo will talk about the Ring.
+
+Hints: You have to adjust the prompt and add tests.
 
 4. Test multiple models
 It would be interesting to know whether the prompts work fine with different LLMs. 
 Currently we are using a faster cheaper model GPT 3.5.
 Evaluate outputs and test the application with GPT 4.
 
+Hints: You have to adjust the promptfoo config and gptApi.ts
+
 5. The Bot can protect itself
 Like a in real life, a character can stop a conversation and act if necessary.
 When the Bot get's threatened it might do an action in the RPG game.
 The Bot should signal to the Dungeon Master that character would probably take an action now, e.g. go away, attack, etc.
-A modal dialog / alert should appear in the ChatRPG application, when the character gets seriously threatened.
+If the character gets physically threatened by the user, a modal dialog / alert should appear in the application.
+Instead of the response chat message.
+
+Hints: You have to adjust the prompt and the frontend code. 
+You can instruct the LLM to return a certain string in case of threats from the user and react on that string in the GUI instad of showing a message.
+
+6. Bonus
+Implement any small feature to improve the application
