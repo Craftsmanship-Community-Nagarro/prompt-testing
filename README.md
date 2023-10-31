@@ -27,6 +27,7 @@ Start the application:
 ## Setup Prompt Testing
 We are going to use the promptfoo library to write prompt tests.
 
+- create an environment variable name -> OPENAI_API_KEY, value -> your API key ([alternative configuration](https://www.promptfoo.dev/docs/providers/openai/#configuring-parameters))
 - open command line and install promptfoo globally, make sure you use this version:
     - npm install -g promptfoo@0.26.0
 - try test execution run: *promptfoo eval*
