@@ -11,6 +11,7 @@ For an introduction to this topic I can recommend this video presentation of Jos
 Requirements:
 - install node.js
 - install npm
+- npm install -g @angular/cli
 
 git clone https://github.com/Craftsmanship-Community-Nagarro/prompt-testing.git
 
