@@ -25,7 +25,7 @@ Make soure you don't accidentally commit the secret to git.
 Start the application:
 - open command line
 - go to the folder /ChatRPG
-- execute *ng serve*
+- execute *ng serve* or *npm run start*
 
 ## Setup Prompt Testing
 We are going to use the promptfoo library to write prompt tests.
