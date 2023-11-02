@@ -12,6 +12,8 @@ Requirements:
 - install node.js
 - install npm
 
+git clone https://github.com/Craftsmanship-Community-Nagarro/prompt-testing.git
+
 Setup your OpenAI API Key: 
 - go to the file /ChatRPG/src/assets
 - create a file named secret_api.key
